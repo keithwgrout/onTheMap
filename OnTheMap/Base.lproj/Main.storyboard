@@ -168,17 +168,6 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="rL0-Ly-z7x"/>
-                    <navigationItem key="navigationItem" title="On The Map" id="ft7-3o-DdL">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="1is-Z7-2q4">
-                            <connections>
-                                <action selector="logout:" destination="QdR-G0-2VT" id="i18-jb-6JQ"/>
-                            </connections>
-                        </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="F2o-6h-VWg"/>
-                            <barButtonItem image="pin" id="3B3-Bs-hCk"/>
-                        </rightBarButtonItems>
-                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="9Tn-ln-c5r" id="fnU-Tn-Gbq"/>
                     </connections>
@@ -187,7 +176,7 @@
             </objects>
             <point key="canvasLocation" x="-347" y="1919"/>
         </scene>
-        <!--On The Map-->
+        <!--Item-->
         <scene sceneID="4Vo-ra-wFI">
             <objects>
                 <tableViewController storyboardIdentifier="StudentTableViewController" id="NCi-kc-ZK0" customClass="StudentTableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -231,23 +220,22 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="4JY-a5-hpw"/>
-                    <navigationItem key="navigationItem" title="On The Map" id="mrH-5k-J2l">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="A6R-CU-FOX"/>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="sbB-9l-iSR"/>
-                            <barButtonItem image="pin" id="nLI-AQ-06f"/>
-                        </rightBarButtonItems>
-                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGu-po-4a0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-361" y="2672"/>
         </scene>
-        <!--Map Tab Controller-->
+        <!--On The Map-->
         <scene sceneID="Q14-fy-egV">
             <objects>
                 <tabBarController storyboardIdentifier="MapTabController" id="PDd-Ga-wd6" customClass="MapTabController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="G8p-Tt-YSQ"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="G8p-Tt-YSQ">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="PBY-c5-BTW"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="aCm-lA-Kbp"/>
+                            <barButtonItem image="pin" id="Gco-x6-lAT"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="1D2-GM-qYN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
