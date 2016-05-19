@@ -55,9 +55,11 @@ class LoginViewController: UIViewController {
         let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
         appDel.students = students
         
-        let mapTC = storyboard?.instantiateViewControllerWithIdentifier("MapTabController") as! MapTabController
-                
-        presentViewController(mapTC, animated: true, completion: nil)
+        performSegueWithIdentifier("MTCSegue", sender: self)
+        
+//        let mapTC = storyboard?.instantiateViewControllerWithIdentifier("MapTabController") as! MapTabController
+//                
+//        presentViewController(mapTC, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -76,6 +78,8 @@ class LoginViewController: UIViewController {
             webVC.requestURL = NSURL(string: UdacityClient.Constants.SignUPURL)
             print(webVC.requestURL)
         }
+        
+    
     }
 
 

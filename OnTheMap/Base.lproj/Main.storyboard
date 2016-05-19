@@ -90,11 +90,28 @@
                     <connections>
                         <outlet property="emailTextField" destination="ffc-b1-3U0" id="NgA-9E-LLT"/>
                         <outlet property="passwordTextField" destination="T0D-qp-FUO" id="6V2-IP-CfM"/>
+                        <segue destination="2ct-WH-GSF" kind="show" identifier="MTCSegue" id="K5A-zV-Ywh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1085" y="413"/>
+            <point key="canvasLocation" x="-1181" y="1071"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gql-3T-XPI">
+            <objects>
+                <navigationController id="2ct-WH-GSF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ylg-Ro-4WM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PDd-Ga-wd6" kind="relationship" relationship="rootViewController" id="05Q-Z4-L46"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nxE-gZ-jMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1181" y="1919"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="HlT-Fg-IT8">
@@ -124,7 +141,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CxV-Gc-Hww" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="440" y="413"/>
+            <point key="canvasLocation" x="-279" y="1071"/>
         </scene>
         <!--MapViewController-->
         <scene sceneID="ozv-zb-MqK">
@@ -152,7 +169,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="rL0-Ly-z7x"/>
                     <navigationItem key="navigationItem" title="On The Map" id="ft7-3o-DdL">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="1is-Z7-2q4"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="1is-Z7-2q4">
+                            <connections>
+                                <action selector="logout:" destination="QdR-G0-2VT" id="i18-jb-6JQ"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="F2o-6h-VWg"/>
                             <barButtonItem image="pin" id="3B3-Bs-hCk"/>
@@ -263,6 +284,7 @@
         <scene sceneID="Q14-fy-egV">
             <objects>
                 <tabBarController storyboardIdentifier="MapTabController" id="PDd-Ga-wd6" customClass="MapTabController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="G8p-Tt-YSQ"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="1D2-GM-qYN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -275,7 +297,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6GG-7y-ILd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1143" y="2392"/>
+            <point key="canvasLocation" x="-1181" y="2672"/>
         </scene>
     </scenes>
     <resources>
