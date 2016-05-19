@@ -19,9 +19,7 @@ class LoginViewController: UIViewController {
     @IBAction func LoginPressed(sender: UIButton) {
         
         // authenticate with udacity
-        
-        // get the username
-        // get the password
+        // get username and password
         guard let user = emailTextField.text else {
             print("invalid username")
             return
@@ -33,21 +31,33 @@ class LoginViewController: UIViewController {
         
         let accountInfo = ["username":user, "password":password]
         
-        
-        // probably want to define a callback here to handle completion of the task 
+        // start authentication, and if successful download user data
         UdacityClient().authenticate(accountInfo) { (success, errorString) in
-            if success {
-                self.completeLogin()
-            } else {
-                print("Login not successful")
-            }
+                if success {
+                    ParseClient().getParseData({ (students, success, errorString) in
+                        if success {
+                         performUIUpdatesOnMain({ 
+                            self.completeLogin(students)
+                         })
+                        } else {
+                            print("could not login successfully")
+                        }
+                        
+                    })
+                } else {
+                    print("Login not successful")
+                }
         }
     }
     
-    func completeLogin(){
-        let controller = storyboard?.instantiateViewControllerWithIdentifier("MapTabController") as! UITabBarController
+    func completeLogin(students: [Student]){
+        print("login complete")
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDel.students = students
         
-        presentViewController(controller, animated: true, completion: nil)
+        let mapTC = storyboard?.instantiateViewControllerWithIdentifier("MapTabController") as! MapTabController
+                
+        presentViewController(mapTC, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

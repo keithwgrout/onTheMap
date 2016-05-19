@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -40,12 +41,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="elJ-WO-aOP">
                                 <rect key="frame" x="20" y="245" width="560" height="110"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ffc-b1-3U0">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="keiwi.g@gmail.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ffc-b1-3U0">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T0D-qp-FUO">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="irdamu81" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T0D-qp-FUO">
                                         <rect key="frame" x="0.0" y="40" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -125,10 +126,10 @@
             </objects>
             <point key="canvasLocation" x="440" y="413"/>
         </scene>
-        <!--Item 1-->
+        <!--MapViewController-->
         <scene sceneID="ozv-zb-MqK">
             <objects>
-                <viewController id="QdR-G0-2VT" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="QdR-G0-2VT" userLabel="MapViewController" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5NJ-I1-qnB"/>
                         <viewControllerLayoutGuide type="bottom" id="NUL-bn-tgd"/>
@@ -150,17 +151,26 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="rL0-Ly-z7x"/>
-                    <navigationItem key="navigationItem" id="u7U-Yu-Nec"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="ft7-3o-DdL">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="1is-Z7-2q4"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="F2o-6h-VWg"/>
+                            <barButtonItem image="pin" id="3B3-Bs-hCk"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="9Tn-ln-c5r" id="fnU-Tn-Gbq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dJ9-uB-t5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="463" y="1811"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="hPG-R9-Cc6">
             <objects>
                 <navigationController id="4VY-pO-026" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="zuE-iA-oWU"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="zuE-iA-oWU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="p7D-Wk-JNh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -173,21 +183,41 @@
             </objects>
             <point key="canvasLocation" x="-279" y="1811"/>
         </scene>
-        <!--Root View Controller-->
+        <!--On The Map-->
         <scene sceneID="4Vo-ra-wFI">
             <objects>
-                <tableViewController id="NCi-kc-ZK0" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="StudentTableViewController" id="NCi-kc-ZK0" customClass="StudentTableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aNV-hI-XLi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" id="Zkd-bU-8KI">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" textLabel="v1h-KA-fDf" detailTextLabel="92l-DF-0CW" imageView="6nC-5S-QJB" style="IBUITableViewCellStyleSubtitle" id="Zkd-bU-8KI">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zkd-bU-8KI" id="rc7-B3-nVn">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v1h-KA-fDf">
+                                            <rect key="frame" x="62" y="5" width="32" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="92l-DF-0CW">
+                                            <rect key="frame" x="62" y="25" width="41" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin" id="6nC-5S-QJB">
+                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -196,21 +226,31 @@
                             <outlet property="delegate" destination="NCi-kc-ZK0" id="ttY-4G-uBu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="mrH-5k-J2l"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="mrH-5k-J2l">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="A6R-CU-FOX"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="sbB-9l-iSR"/>
+                            <barButtonItem image="pin" id="nLI-AQ-06f"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGu-po-4a0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="541" y="2835"/>
+            <point key="canvasLocation" x="501" y="2823"/>
         </scene>
-        <!--Item-->
+        <!--List-->
         <scene sceneID="WRO-cg-Pz1">
             <objects>
                 <navigationController id="nZS-dV-qlC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="OGY-Gz-2cn"/>
+                    <tabBarItem key="tabBarItem" title="List" image="list" id="OGY-Gz-2cn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="alb-Sw-1M1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="lkd-gX-C5L">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="NCi-kc-ZK0" kind="relationship" relationship="rootViewController" id="eef-5b-Bb2"/>
                     </connections>
@@ -239,6 +279,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="list" width="32" height="32"/>
+        <image name="map" width="32" height="32"/>
+        <image name="pin" width="32" height="32"/>
         <image name="udacity" width="100" height="100"/>
     </resources>
 </document>

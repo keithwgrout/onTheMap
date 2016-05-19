@@ -12,7 +12,7 @@ class ParseClient {
     
     let parseSession = NSURLSession.sharedSession()
 
-    func getParseData(){
+    func getParseData(completionHandlerForParseData: (students: [Student], success: Bool, errorString: String) -> Void){
         
         let requestURLString = Methods.StudentLocation
         let requestURL = NSURL(string: requestURLString)
@@ -23,8 +23,18 @@ class ParseClient {
         
         let task = parseSession.dataTaskWithRequest(request) { (data, response, error) in
             
-            let jsonObject = try! NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-            print(jsonObject)
+            var parsedData: AnyObject?
+            do {
+                parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+            } catch {
+                print("error parsing data")
+                parsedData = nil
+            }
+            
+            let studentJSONArray = parsedData!["results"] as! [[String:AnyObject]]
+            let students = Student.studentsFromResults(studentJSONArray)
+            print(students.count)
+            completionHandlerForParseData(students: students, success: true, errorString: "all good")
         }
         task.resume()
         
