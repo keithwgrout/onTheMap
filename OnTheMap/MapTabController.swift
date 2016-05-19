@@ -29,6 +29,9 @@ class MapTabController: UITabBarController {
         super.viewWillAppear(true)
     }
     
+    @IBAction func logOut(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
 
     /*

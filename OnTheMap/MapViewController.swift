@@ -27,10 +27,6 @@ class MapViewController: UIViewController {
 
     }
     
-    @IBAction func logout(sender: UIBarButtonItem) {
-        navigationController?.popViewControllerAnimated(true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self

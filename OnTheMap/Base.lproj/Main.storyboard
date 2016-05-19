@@ -230,7 +230,11 @@
             <objects>
                 <tabBarController storyboardIdentifier="MapTabController" id="PDd-Ga-wd6" customClass="MapTabController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="G8p-Tt-YSQ">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="PBY-c5-BTW"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="PBY-c5-BTW">
+                            <connections>
+                                <action selector="logOut:" destination="PDd-Ga-wd6" id="KyR-st-1ep"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="aCm-lA-Kbp"/>
                             <barButtonItem image="pin" id="Gco-x6-lAT"/>
