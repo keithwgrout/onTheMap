@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5354AFA81CDE60CA002ABF3A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354AFA71CDE60CA002ABF3A /* MapViewController.swift */; };
 		5354AFAE1CDE9BF1002ABF3A /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354AFAD1CDE9BF1002ABF3A /* GCD.swift */; };
+		53C75D2E1CF35A9700F2EF6D /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C75D2D1CF35A9700F2EF6D /* InformationPostingViewController.swift */; };
 		53DCE8CC1CD77AE2009B090B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DCE8CB1CD77AE2009B090B /* AppDelegate.swift */; };
 		53DCE8CE1CD77AE2009B090B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DCE8CD1CD77AE2009B090B /* LoginViewController.swift */; };
 		53DCE8D11CD77AE2009B090B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53DCE8CF1CD77AE2009B090B /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		5354AFA71CDE60CA002ABF3A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5354AFAD1CDE9BF1002ABF3A /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
+		53C75D2D1CF35A9700F2EF6D /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		53DCE8C81CD77AE2009B090B /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53DCE8CB1CD77AE2009B090B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53DCE8CD1CD77AE2009B090B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				53DCE8CF1CD77AE2009B090B /* Main.storyboard */,
+				53C75D2D1CF35A9700F2EF6D /* InformationPostingViewController.swift */,
 				53DCE8CD1CD77AE2009B090B /* LoginViewController.swift */,
 				53DCE9201CDA3E70009B090B /* MapTabController.swift */,
 				5354AFA71CDE60CA002ABF3A /* MapViewController.swift */,
@@ -240,6 +243,7 @@
 				53DCE91F1CD90EE0009B090B /* SignUpViewController.swift in Sources */,
 				53DCE91D1CD90C6C009B090B /* todo.swift in Sources */,
 				53DCE8CE1CD77AE2009B090B /* LoginViewController.swift in Sources */,
+				53C75D2E1CF35A9700F2EF6D /* InformationPostingViewController.swift in Sources */,
 				53DCE8EE1CD7A811009B090B /* UdacityConstants.swift in Sources */,
 				53DCE8CC1CD77AE2009B090B /* AppDelegate.swift in Sources */,
 				53E827841CEB8C9000999DB2 /* StudentTableViewController.swift in Sources */,

@@ -245,7 +245,11 @@
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="sbB-9l-iSR"/>
-                            <barButtonItem image="pin" id="nLI-AQ-06f"/>
+                            <barButtonItem image="pin" id="nLI-AQ-06f">
+                                <connections>
+                                    <action selector="addInformation:" destination="PDd-Ga-wd6" id="Wac-aK-95W"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="1D2-GM-qYN">
@@ -261,6 +265,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6GG-7y-ILd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1181" y="2672"/>
+        </scene>
+        <!--Information Posting View Controller-->
+        <scene sceneID="oLq-Rv-oeP">
+            <objects>
+                <viewController storyboardIdentifier="InformationPostingViewController" id="0YP-hU-pf3" customClass="InformationPostingViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yTA-fy-rdF"/>
+                        <viewControllerLayoutGuide type="bottom" id="wGK-EM-sR5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tuW-Km-YUs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO1-Z7-ame">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="268"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="268" id="H4P-MY-BOw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City, State (Pittsburgh, PA)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ma2-ui-MVV">
+                                <rect key="frame" x="0.0" y="285" width="600" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJz-TY-9iU">
+                                <rect key="frame" x="191" y="431" width="219" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="RZw-q9-dbc"/>
+                                    <constraint firstAttribute="width" constant="219" id="Tsg-TJ-rtY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <state key="normal" title="Find on the Map"/>
+                                <connections>
+                                    <action selector="findLocation:" destination="0YP-hU-pf3" eventType="touchUpInside" id="z34-qd-sGj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wGK-EM-sR5" firstAttribute="top" secondItem="OJz-TY-9iU" secondAttribute="bottom" constant="76" id="1k2-9H-iZT"/>
+                            <constraint firstItem="OJz-TY-9iU" firstAttribute="centerX" secondItem="tuW-Km-YUs" secondAttribute="centerX" id="2ak-Df-b6P"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iO1-Z7-ame" secondAttribute="trailing" constant="-20" id="E5P-zo-3Hr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ma2-ui-MVV" secondAttribute="trailing" constant="-20" id="QQf-Hg-YQ9"/>
+                            <constraint firstItem="iO1-Z7-ame" firstAttribute="leading" secondItem="tuW-Km-YUs" secondAttribute="leadingMargin" constant="-20" id="kBd-mN-xfZ"/>
+                            <constraint firstItem="Ma2-ui-MVV" firstAttribute="top" secondItem="iO1-Z7-ame" secondAttribute="bottom" constant="17" id="m7f-xH-c4C"/>
+                            <constraint firstItem="iO1-Z7-ame" firstAttribute="top" secondItem="tuW-Km-YUs" secondAttribute="topMargin" id="ofT-93-HUQ"/>
+                            <constraint firstItem="Ma2-ui-MVV" firstAttribute="leading" secondItem="tuW-Km-YUs" secondAttribute="leadingMargin" constant="-20" id="zQ1-yL-Kap"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="studentLocationField" destination="Ma2-ui-MVV" id="Kkq-cZ-urH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aEa-5F-XG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1183" y="3385"/>
         </scene>
     </scenes>
     <resources>

@@ -16,6 +16,11 @@ class MapTabController: UITabBarController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func addInformation(sender: UIBarButtonItem) {
+        let IPVC = storyboard?.instantiateViewControllerWithIdentifier("InformationPostingViewController") as! InformationPostingViewController
+        presentViewController(IPVC, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -26,8 +31,6 @@ class MapTabController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
