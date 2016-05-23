@@ -12,6 +12,10 @@ class MapTabController: UITabBarController {
     
     var students = [Student]()
     
+    @IBAction func logOut(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
