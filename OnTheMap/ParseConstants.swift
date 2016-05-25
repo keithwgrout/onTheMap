@@ -34,6 +34,15 @@ extension ParseClient {
         static let order = ""
     }
     
+    struct AuthResponseKeys {
+        static let User = "user"
+        static let UserFirstName = "first_name"
+        static let UserLastName = "last_name"
+        static let UserKey = "key"
+        static let Location = "location"
+
+    }
+    
     struct JSONResponseKeys {
         static let results = "results"
         

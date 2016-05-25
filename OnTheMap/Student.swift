@@ -16,16 +16,17 @@ class Student: NSObject, MKAnnotation {
     var subtitle: String?
     
 
-    let firstName: String?
-    let lastName: String?
-    let latitude: Double?
-    let longitude: Double?
-    let mapString: String?
-    let mediaURL: String?
-    let objectID: String?
-    let uniqueKey: Int?
-    let createdAt: String?
-    let updatedAt: String?
+    var firstName: String?
+    var lastName: String?
+    var latitude: Double?
+    var longitude: Double?
+    var mapString: String?
+    var mediaURL: String?
+    var objectID: String?
+    var uniqueKey: Int?
+    var createdAt: String?
+    var updatedAt: String?
+    
     
     init(dictionary: [String:AnyObject]) {
     

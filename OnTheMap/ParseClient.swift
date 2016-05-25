@@ -1,4 +1,4 @@
-//
+
 //  ParseClient.swift
 //  OnTheMap
 //
@@ -39,5 +39,53 @@ class ParseClient {
         task.resume()
         
     }
+    
+    
+    func postStudentData(){
+        // build student data
+        
+        // initialize request
+//        var request = NSMutableURLRequest(URL: nsurl)
+        // build request
+        // create task
+        // post data
+        // get response
+        // resume task
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

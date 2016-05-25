@@ -287,11 +287,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City, State (Pittsburgh, PA)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ma2-ui-MVV">
-                                <rect key="frame" x="0.0" y="285" width="600" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJz-TY-9iU">
                                 <rect key="frame" x="191" y="431" width="219" height="93"/>
                                 <constraints>
@@ -304,21 +299,59 @@
                                     <action selector="findLocation:" destination="0YP-hU-pf3" eventType="touchUpInside" id="z34-qd-sGj"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City, State (Pittsburgh, PA)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ma2-ui-MVV">
+                                <rect key="frame" x="0.0" y="285" width="600" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QwK-gZ-SGY">
+                                <rect key="frame" x="0.0" y="222" width="600" height="378"/>
+                            </mapView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Web Address?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JYX-yg-hLe">
+                                <rect key="frame" x="0.0" y="119" width="600" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Kyb-Lg-Xih"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gga-Ai-WrL">
+                                <rect key="frame" x="253" y="494" width="95" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="postUserData:" destination="0YP-hU-pf3" eventType="touchUpInside" id="EJJ-3N-7uY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wGK-EM-sR5" firstAttribute="top" secondItem="OJz-TY-9iU" secondAttribute="bottom" constant="76" id="1k2-9H-iZT"/>
                             <constraint firstItem="OJz-TY-9iU" firstAttribute="centerX" secondItem="tuW-Km-YUs" secondAttribute="centerX" id="2ak-Df-b6P"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iO1-Z7-ame" secondAttribute="trailing" constant="-20" id="E5P-zo-3Hr"/>
+                            <constraint firstItem="QwK-gZ-SGY" firstAttribute="top" secondItem="JYX-yg-hLe" secondAttribute="bottom" constant="73" id="Fjj-Wc-1v1"/>
+                            <constraint firstItem="JYX-yg-hLe" firstAttribute="top" secondItem="iO1-Z7-ame" secondAttribute="bottom" constant="-149" id="Hne-vD-oDo"/>
+                            <constraint firstItem="wGK-EM-sR5" firstAttribute="top" secondItem="QwK-gZ-SGY" secondAttribute="bottom" id="IUK-do-3bZ"/>
+                            <constraint firstItem="JYX-yg-hLe" firstAttribute="leading" secondItem="tuW-Km-YUs" secondAttribute="leadingMargin" constant="-20" id="PBi-H2-NlM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ma2-ui-MVV" secondAttribute="trailing" constant="-20" id="QQf-Hg-YQ9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QwK-gZ-SGY" secondAttribute="trailing" constant="-20" id="WPb-iI-4f6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JYX-yg-hLe" secondAttribute="trailing" constant="-20" id="a27-Eu-jWW"/>
                             <constraint firstItem="iO1-Z7-ame" firstAttribute="leading" secondItem="tuW-Km-YUs" secondAttribute="leadingMargin" constant="-20" id="kBd-mN-xfZ"/>
                             <constraint firstItem="Ma2-ui-MVV" firstAttribute="top" secondItem="iO1-Z7-ame" secondAttribute="bottom" constant="17" id="m7f-xH-c4C"/>
+                            <constraint firstItem="Gga-Ai-WrL" firstAttribute="top" secondItem="QwK-gZ-SGY" secondAttribute="bottom" constant="-106" id="mFR-o9-I2e"/>
                             <constraint firstItem="iO1-Z7-ame" firstAttribute="top" secondItem="tuW-Km-YUs" secondAttribute="topMargin" id="ofT-93-HUQ"/>
+                            <constraint firstItem="QwK-gZ-SGY" firstAttribute="leading" secondItem="tuW-Km-YUs" secondAttribute="leadingMargin" constant="-20" id="yoB-kD-ciQ"/>
                             <constraint firstItem="Ma2-ui-MVV" firstAttribute="leading" secondItem="tuW-Km-YUs" secondAttribute="leadingMargin" constant="-20" id="zQ1-yL-Kap"/>
+                            <constraint firstItem="Gga-Ai-WrL" firstAttribute="centerX" secondItem="QwK-gZ-SGY" secondAttribute="centerX" id="zmg-Zd-rWH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="findButton" destination="OJz-TY-9iU" id="ESx-po-cye"/>
+                        <outlet property="mapView" destination="QwK-gZ-SGY" id="SqF-C7-tll"/>
+                        <outlet property="prompt" destination="iO1-Z7-ame" id="Xec-Lr-ssa"/>
                         <outlet property="studentLocationField" destination="Ma2-ui-MVV" id="Kkq-cZ-urH"/>
+                        <outlet property="studentURL" destination="JYX-yg-hLe" id="Mnk-ZM-wZq"/>
+                        <outlet property="submitButton" destination="Gga-Ai-WrL" id="C0D-n6-3m9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aEa-5F-XG4" userLabel="First Responder" sceneMemberID="firstResponder"/>

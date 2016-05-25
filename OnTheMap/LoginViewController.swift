@@ -8,6 +8,8 @@
 
 import UIKit
 
+let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+
 class LoginViewController: UIViewController {
 
     // MARK: Properties
@@ -32,8 +34,11 @@ class LoginViewController: UIViewController {
         let accountInfo = ["username":user, "password":password]
         
         // start authentication, and if successful download user data
-        UdacityClient().authenticate(accountInfo) { (success, errorString) in
+        UdacityClient().authenticate(accountInfo) { (success, userData, errorString) in
                 if success {
+                    
+                    self.initializeUser(userData!)
+                
                     ParseClient().getParseData({ (students, success, errorString) in
                         if success {
                          performUIUpdatesOnMain({ 
@@ -50,9 +55,22 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func initializeUser(userData:[String:AnyObject])  {
+        
+        
+        
+        let userDictionary = userData[ParseClient.AuthResponseKeys.User] as! [String:AnyObject]
+        
+        var newUser = User(userDictionary: userDictionary)
+        appDel.user = newUser
+        print(appDel.user)
+
+        
+        
+    }
+    
     func completeLogin(students: [Student]){
         print("login complete")
-        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
         appDel.students = students
         
         performSegueWithIdentifier("MTCSegue", sender: self)
@@ -67,6 +85,8 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -22,34 +22,25 @@ class UdacityClient {
     var userID: String?
     var registered: Bool?
     
-    func authenticate(accountInfo: [String:String], completionHandlerForAuth: (success: Bool, errorString: String?) -> Void) {
+    func authenticate(accountInfo: [String:String], completionHandlerForAuth: (success: Bool, userData:[String:AnyObject]?, errorString: String?) -> Void) {
         print("authenticating")
-        // call get sessionID
-        // sessionID's like, what up bro, here's what
-        // happened, i got this SessionID for u,
-        // im all like cool, imma call getUserData
-        // and give it to him so he can grab that
-        // userData. So i call getUSERData, and he does his
-        // thing and he gives me the userData
-        // so then im like, shit aight. if all that went good
-        // imma just call my completionHandler and be like yo!
-        // success!
         getSessionID(accountInfo) { (success, sessionID, errorString) in
             if success {
                 self.getUserData(sessionID) {(success, userData, errorString) in
+                    
                     if success {
-                        completionHandlerForAuth(success: success, errorString: errorString)
+                        completionHandlerForAuth(success: success, userData: userData, errorString: errorString)
                     } else {
-                        completionHandlerForAuth(success: success, errorString: errorString)
+                        completionHandlerForAuth(success: success, userData: nil, errorString: errorString)
                     }
                 }
             } else {
-                completionHandlerForAuth(success: success, errorString: errorString)
+                completionHandlerForAuth(success: success, userData: nil, errorString: errorString)
             }
         }
     }
     
-    func getUserData(sessionID: String?, completionHandlerForUserData: (success: Bool, userData: String?, errorString: String?) -> Void) {
+    func getUserData(sessionID: String?, completionHandlerForUserData: (success: Bool, userData: [String:AnyObject]?, errorString: String?) -> Void) {
         // use the user id to get public user data
         let userDataUrlString = "https://www.udacity.com/api/users/\(self.userID!)"
         let request = NSURLRequest(URL: NSURL(string: userDataUrlString)!)
@@ -65,9 +56,9 @@ class UdacityClient {
                 print("error parsing raw data")
             }
             
-            let stringData = String(parsedData)
+            let arrayUserData = parsedData! as! [String:AnyObject]
             
-            completionHandlerForUserData(success: true, userData: stringData, errorString: nil)
+            completionHandlerForUserData(success: true, userData: arrayUserData, errorString: nil)
         }
         
         task.resume()
