@@ -39,11 +39,10 @@ class LoginViewController: UIViewController {
         UdacityClient().authenticate(accountInfo) { (success, userData, errorString) in
             if success {
                 self.initializeUser(userData!)
-                
-                ParseClient().getParseData({ (students, success, errorString) in
+                ParseClient().getParseData({ (success, errorString) in
                     if success {
                         performUIUpdatesOnMain({
-                            self.completeLogin(students!)
+                            self.completeLogin()
                         })
                     } else {
                         print("could not download data successfully")
@@ -91,9 +90,8 @@ class LoginViewController: UIViewController {
         appDel.user = newUser
     }
     
-    func completeLogin(students: [Student]){
+    func completeLogin(){
         print("login complete")
-        appDel.students = students
         performSegueWithIdentifier("MTCSegue", sender: self)
     }
     

@@ -12,7 +12,7 @@ class ParseClient {
     
     let parseSession = NSURLSession.sharedSession()
 
-    func getParseData(completionHandlerForParseData: (students: [Student]?, success: Bool, errorString: String) -> Void){
+    func getParseData(completionHandlerForParseData: (success: Bool, errorString: String) -> Void){
         
         let requestURLString = Methods.StudentLocation
         let requestURL = NSURL(string: requestURLString)
@@ -28,7 +28,7 @@ class ParseClient {
                 return
             }
             guard response != nil || error == nil else {
-                completionHandlerForParseData(students: nil, success: false, errorString: "data failed to download")
+                completionHandlerForParseData(success: false, errorString: "data failed to download")
                 return
             }
             
@@ -42,8 +42,9 @@ class ParseClient {
             
             let studentJSONArray = parsedData!["results"] as! [[String:AnyObject]]
             let students = Student.studentsFromResults(studentJSONArray)
+            appDel.students = students
             print(students.count)
-            completionHandlerForParseData(students: students, success: true, errorString: "all good")
+            completionHandlerForParseData(success: true, errorString: "all good")
         }
         task.resume()
         

@@ -11,15 +11,14 @@ import UIKit
 class MapTabController: UITabBarController {
     
     @IBAction func reloadData(sender: UIBarButtonItem) {
-        ParseClient().getParseData({ (students, success, errorString) in
+        ParseClient().getParseData({ (success, errorString) in
             if success {
                 print("success")
-                appDel.students = students!
-                let tableVC = self.storyboard?.instantiateViewControllerWithIdentifier("StudentTableViewController") as! StudentTableViewController
-                tableVC.students = students!
+                
                 performUIUpdatesOnMain({
+                    let tableVC = self.storyboard?.instantiateViewControllerWithIdentifier("StudentTableViewController") as! StudentTableViewController
+                    tableVC.students = appDel.students
                     tableVC.tableView!.reloadData()
-                    
                 })
             } else {
                 print("could not download data successfully")

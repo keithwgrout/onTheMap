@@ -11,19 +11,20 @@ import UIKit
 class StudentTableViewController: UITableViewController {
     
    
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+   
     var students = [Student]()
 
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
         super.viewDidLoad()
+        tableView.reloadData()
         
     }
     
     override func viewWillAppear(animated: Bool) {
         print("called")
-        students = appDelegate.students
+        students = appDel.students
         students.sortInPlace({$0.updatedAt! > $1.updatedAt!})
         tableView.reloadData()
     }
