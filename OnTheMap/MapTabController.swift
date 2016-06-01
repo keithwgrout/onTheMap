@@ -10,9 +10,31 @@ import UIKit
 
 class MapTabController: UITabBarController {
     
-    var students = [Student]()
-    
+    @IBAction func reloadData(sender: UIBarButtonItem) {
+        ParseClient().getParseData({ (students, success, errorString) in
+            if success {
+                print("success")
+                appDel.students = students!
+                let tableVC = self.storyboard?.instantiateViewControllerWithIdentifier("StudentTableViewController") as! StudentTableViewController
+                tableVC.students = students!
+                performUIUpdatesOnMain({
+                    tableVC.tableView!.reloadData()
+                    
+                })
+            } else {
+                print("could not download data successfully")
+                let reloadFailedAlert = UIAlertController(title: "Something went wrong", message: "Unable to reload data", preferredStyle: .Alert)
+                let okayAction = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+                reloadFailedAlert.addAction(okayAction)
+                performUIUpdatesOnMain({
+                    self.presentViewController(reloadFailedAlert, animated: true, completion: nil)
+                })
+                
+            }
+        })
+    }
     @IBAction func logOut(sender: UIBarButtonItem) {
+        UdacityClient().deleteSession()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -35,17 +57,5 @@ class MapTabController: UITabBarController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -1,4 +1,4 @@
-
+//
 //  ParseClient.swift
 //  OnTheMap
 //
@@ -12,7 +12,7 @@ class ParseClient {
     
     let parseSession = NSURLSession.sharedSession()
 
-    func getParseData(completionHandlerForParseData: (students: [Student], success: Bool, errorString: String) -> Void){
+    func getParseData(completionHandlerForParseData: (students: [Student]?, success: Bool, errorString: String) -> Void){
         
         let requestURLString = Methods.StudentLocation
         let requestURL = NSURL(string: requestURLString)
@@ -22,6 +22,15 @@ class ParseClient {
         request.addValue(Constants.RestAPIKey, forHTTPHeaderField: Constants.HeaderFieldAPIKey)
         
         let task = parseSession.dataTaskWithRequest(request) { (data, response, error) in
+            
+            guard data != nil else {
+                print("no data was returned")
+                return
+            }
+            guard response != nil || error == nil else {
+                completionHandlerForParseData(students: nil, success: false, errorString: "data failed to download")
+                return
+            }
             
             var parsedData: AnyObject?
             do {
@@ -39,42 +48,6 @@ class ParseClient {
         task.resume()
         
     }
-    
-    
-    func postStudentData(){
-        // build student data
-        
-        // initialize request
-//        var request = NSMutableURLRequest(URL: nsurl)
-        // build request
-        // create task
-        // post data
-        // get response
-        // resume task
-    
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

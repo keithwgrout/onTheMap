@@ -40,7 +40,8 @@ extension UdacityClient {
         static let key = "key"
         static let registered = "registered"
         static let id = "id"
-        
+        static let error = "error"
+        static let status = "status"
     }
 
 }

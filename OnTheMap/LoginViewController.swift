@@ -31,61 +31,78 @@ class LoginViewController: UIViewController {
             return
         }
         
+        // verify username and password fields are not empty
+        
         let accountInfo = ["username":user, "password":password]
         
         // start authentication, and if successful download user data
         UdacityClient().authenticate(accountInfo) { (success, userData, errorString) in
-                if success {
-                    
-                    self.initializeUser(userData!)
+            if success {
+                self.initializeUser(userData!)
                 
-                    ParseClient().getParseData({ (students, success, errorString) in
-                        if success {
-                         performUIUpdatesOnMain({ 
-                            self.completeLogin(students)
-                         })
-                        } else {
-                            print("could not login successfully")
-                        }
+                ParseClient().getParseData({ (students, success, errorString) in
+                    if success {
+                        performUIUpdatesOnMain({
+                            self.completeLogin(students!)
+                        })
+                    } else {
+                        print("could not download data successfully")
+                        performUIUpdatesOnMain({
+                            self.downloadFailed()
+                        })
                         
-                    })
-                } else {
-                    print("Login not successful")
-                }
+                    }
+                })
+            } else {
+                performUIUpdatesOnMain({
+                    self.authorizationDidFail(withErrorString: errorString!)
+                })
+            }
         }
     }
     
-    func initializeUser(userData:[String:AnyObject])  {
+    func downloadFailed() {
+        let downloadFailureAlert = UIAlertController(title: "Error retrieving data", message: "Student data failed to download", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        downloadFailureAlert.addAction(action)
+        presentViewController(downloadFailureAlert, animated: true, completion: nil)
         
-        
-        
-        let userDictionary = userData[ParseClient.AuthResponseKeys.User] as! [String:AnyObject]
-        
-        var newUser = User(userDictionary: userDictionary)
-        appDel.user = newUser
-        print(appDel.user)
+    }
+    
+    func authorizationDidFail(withErrorString errorString:String){
+        let failureAlert = UIAlertController(title: "Login Unsuccessful", message: "Please try again", preferredStyle: .Alert)
 
-        
-        
+        if errorString == "no internet" {
+            failureAlert.title = "No Internet Connection"
+            failureAlert.message = "Please reconnect and try again"
+        } else if errorString == "invalid credentials" {
+            failureAlert.title = "Invalid Username or Password"
+            failureAlert.message = "It appears at least one of your credentials is incorrect."
+        }
+        print("Login not successful")
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        failureAlert.addAction(action)
+        presentViewController(failureAlert, animated: true, completion: nil)
+    }
+    
+    func initializeUser(userData:[String:AnyObject])  {
+        let userDictionary = userData[ParseClient.AuthResponseKeys.User] as! [String:AnyObject]
+        let newUser = User(userDictionary: userDictionary)
+        appDel.user = newUser
     }
     
     func completeLogin(students: [Student]){
         print("login complete")
         appDel.students = students
-        
         performSegueWithIdentifier("MTCSegue", sender: self)
-        
-//        let mapTC = storyboard?.instantiateViewControllerWithIdentifier("MapTabController") as! MapTabController
-//                
-//        presentViewController(mapTC, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -98,10 +115,13 @@ class LoginViewController: UIViewController {
             webVC.requestURL = NSURL(string: UdacityClient.Constants.SignUPURL)
             print(webVC.requestURL)
         }
-        
-    
     }
+}
 
-
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 

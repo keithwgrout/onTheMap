@@ -15,8 +15,17 @@ class StudentTableViewController: UITableViewController {
     var students = [Student]()
 
     override func viewDidLoad() {
+        tableView.delegate = self
+        tableView.dataSource = self
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        print("called")
         students = appDelegate.students
+        students.sortInPlace({$0.updatedAt! > $1.updatedAt!})
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -38,11 +47,23 @@ class StudentTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let student = students[indexPath.row]
-        
         let app = UIApplication.sharedApplication()
-        app.openURL(NSURL(string: student.subtitle!)!)
         
+        var url = NSURL(string: student.subtitle!)
+        var urlString: String
         
+        if let url = url {
+            urlString = String(url)
+        } else {
+            url = NSURL(string: "apple.com")
+            urlString = "apple"
+        }
+        
+        if url!.scheme.lowercaseString != "https" && url!.scheme.lowercaseString != "http" {
+            urlString = "http://" + urlString
+            url = NSURL(string: urlString)
+        }
+        app.openURL(url!)
     }
 
 }
