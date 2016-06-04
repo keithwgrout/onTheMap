@@ -19,6 +19,7 @@ class UdacityClient {
         print("authenticating")
         getSessionID(accountInfo) { (success, sessionID, errorString) in
             if success {
+                print("success")
                 self.getUserData(sessionID) {(success, userData, errorString) in
                     if success {
                         completionHandlerForAuth(success: success, userData: userData, errorString: errorString)
@@ -27,6 +28,7 @@ class UdacityClient {
                     }
                 }
             } else {
+                print("failed")
                 completionHandlerForAuth(success: success, userData: nil, errorString: errorString)
             }
         }
@@ -107,7 +109,9 @@ class UdacityClient {
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             
+            
             guard response != nil else {
+                print("no response")
                 if let error = error {
                     if error.code == -1009 {
                         print("Internet appears to be offline")
@@ -125,7 +129,6 @@ class UdacityClient {
                 return
             }
             
-            
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
             
             var parsedData: AnyObject!
@@ -136,10 +139,13 @@ class UdacityClient {
             }
             
             guard parsedData[UdacityClient.JSONResponseKeys.error]! == nil else {
-                
+                print("here we've failed")
+                print(parsedData)
                 if parsedData[UdacityClient.JSONResponseKeys.status] as! Int == 403 {
                     print("invalid credentials")
                     completionHandlerForSessionID(success: false, sessionID: nil, errorString: "invalid credentials")
+                } else {
+                    completionHandlerForSessionID(success: false, sessionID: nil, errorString: "unknown response error")
                 }
                 return
             }

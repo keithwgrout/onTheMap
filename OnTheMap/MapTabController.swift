@@ -13,25 +13,33 @@ class MapTabController: UITabBarController {
     @IBAction func reloadData(sender: UIBarButtonItem) {
         ParseClient().getParseData({ (success, errorString) in
             if success {
-                print("success")
-                
-                performUIUpdatesOnMain({
-                    let tableVC = self.storyboard?.instantiateViewControllerWithIdentifier("StudentTableViewController") as! StudentTableViewController
-                    tableVC.students = appDel.students
-                    tableVC.tableView!.reloadData()
-                })
+                self.refresh()
             } else {
-                print("could not download data successfully")
-                let reloadFailedAlert = UIAlertController(title: "Something went wrong", message: "Unable to reload data", preferredStyle: .Alert)
-                let okayAction = UIAlertAction(title: "Okay", style: .Default, handler: nil)
-                reloadFailedAlert.addAction(okayAction)
-                performUIUpdatesOnMain({
-                    self.presentViewController(reloadFailedAlert, animated: true, completion: nil)
-                })
-                
+                self.reloadFailureAlert()
             }
         })
     }
+    
+    func refresh(){
+        let tabs = self.viewControllers
+        let tableVC = tabs![1] as! StudentTableViewController
+        
+        tableVC.students = appDel.students
+        tableVC.students.sortInPlace({$0.updatedAt! > $1.updatedAt!})
+        performUIUpdatesOnMain({
+            tableVC.tableView!.reloadData()
+        })
+    }
+    
+    func reloadFailureAlert(){
+        let reloadFailedAlert = UIAlertController(title: "Something went wrong", message: "Unable to reload data", preferredStyle: .Alert)
+        let okayAction = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+        reloadFailedAlert.addAction(okayAction)
+        performUIUpdatesOnMain({
+            self.presentViewController(reloadFailedAlert, animated: true, completion: nil)
+        })
+    }
+    
     @IBAction func logOut(sender: UIBarButtonItem) {
         UdacityClient().deleteSession()
         dismissViewControllerAnimated(true, completion: nil)
@@ -45,12 +53,6 @@ class MapTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -15,26 +15,21 @@ class LoginViewController: UIViewController {
     // MARK: Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    var email: String?
+    var password: String?
 
     // MARK: Actions
     
     @IBAction func LoginPressed(sender: UIButton) {
         
+        guard validateTextFields(emailTextField, andPasswordTextField: passwordTextField) != false else {
+            return
+        }
+        
+        let accountInfo = ["username":email!, "password":password!]
+        
         // authenticate with udacity
-        // get username and password
-        guard let user = emailTextField.text else {
-            print("invalid username")
-            return
-        }
-        guard let password = passwordTextField.text else {
-            print("invalid password")
-            return
-        }
-        
-        // verify username and password fields are not empty
-        
-        let accountInfo = ["username":user, "password":password]
-        
         // start authentication, and if successful download user data
         UdacityClient().authenticate(accountInfo) { (success, userData, errorString) in
             if success {
@@ -45,11 +40,9 @@ class LoginViewController: UIViewController {
                             self.completeLogin()
                         })
                     } else {
-                        print("could not download data successfully")
                         performUIUpdatesOnMain({
-                            self.downloadFailed()
+                            self.downloadFailedAlert()
                         })
-                        
                     }
                 })
             } else {
@@ -60,12 +53,38 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func downloadFailed() {
+    func downloadFailedAlert() {
         let downloadFailureAlert = UIAlertController(title: "Error retrieving data", message: "Student data failed to download", preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
         downloadFailureAlert.addAction(action)
         presentViewController(downloadFailureAlert, animated: true, completion: nil)
         
+    }
+    
+    func validateTextFields(emailText: UITextField, andPasswordTextField passwordText: UITextField) -> Bool{
+        
+        let whitespace = NSCharacterSet.whitespaceCharacterSet()
+        
+        passwordText.text = passwordText.text?.stringByTrimmingCharactersInSet(whitespace)
+        emailText.text = emailText.text?.stringByTrimmingCharactersInSet(whitespace)
+
+        if passwordText.text == nil || (passwordText.text?.isEmpty)! {
+            let alert = UIAlertController(title: "Password is required", message: "Please input a password.", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+            alert.addAction(action)
+            presentViewController(alert, animated: true, completion: nil)
+            return false
+        } else if emailText.text == nil || (emailText.text?.isEmpty)!{
+            let alert = UIAlertController(title: "Email is required", message: "Please enter the email you used to sign up with Udacity.", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+            alert.addAction(action)
+            presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        
+        email = emailText.text
+        password = passwordText.text
+        return true
     }
     
     func authorizationDidFail(withErrorString errorString:String){
@@ -117,7 +136,19 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        print("didbeginediting")
+        textField.text = ""
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        print("did end editing")
+        
+    }
+
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        print("shouldreturn")
         textField.resignFirstResponder()
         return true
     }

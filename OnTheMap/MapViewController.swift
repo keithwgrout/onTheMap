@@ -14,7 +14,6 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var students = [Student]()
     
     override func viewWillAppear(animated: Bool) {
@@ -22,7 +21,7 @@ class MapViewController: UIViewController {
         let center = CLLocationCoordinate2D(latitude: 37, longitude: -98.5795)
         let span = MKCoordinateSpan(latitudeDelta: 20, longitudeDelta: 80)
         mapView.region = MKCoordinateRegion(center: center, span: span)
-        students = appDelegate.students
+        students = appDel.students
         mapView.addAnnotations(students)
 
     }
@@ -36,10 +35,7 @@ class MapViewController: UIViewController {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
-    // Here we create a view with a "right callout accessory view". You might choose to look into other
-    // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
-    // method in TableViewDataSource.
+
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         // assign a reuseID
@@ -59,20 +55,29 @@ extension MapViewController: MKMapViewDelegate {
             pinView!.annotation = annotation
 
         }
-        
         // return the annotationView
         return pinView
     }
-    
-    
-    // here we can respond to taps
-    // it opens the system browser to the url specified in the annotations subtitle
+
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
-            if let toOpen = view.annotation?.subtitle! {
-                app.openURL(NSURL(string: toOpen)!)
+            
+            var url = NSURL(string: ((view.annotation?.subtitle)!)!)
+            var urlString: String
+            
+            if let url = url {
+                urlString = String(url)
+            } else {
+                url = NSURL(string: "apple.com")
+                urlString = "apple"
             }
+            
+            if url!.scheme.lowercaseString != "https" && url!.scheme.lowercaseString != "http" {
+                urlString = "http://" + urlString
+                url = NSURL(string: urlString)
+            }
+            app.openURL(url!)
         }
     }
     
