@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     // MARK: Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityLabel: UILabel!
     
     var email: String?
     var password: String?
@@ -27,6 +29,9 @@ class LoginViewController: UIViewController {
             return
         }
         
+        activityIndicator.startAnimating()
+        activityLabel.hidden = false
+        
         let accountInfo = ["username":email!, "password":password!]
         
         // authenticate with udacity
@@ -37,9 +42,11 @@ class LoginViewController: UIViewController {
                 ParseClient().getParseData({ (success, errorString) in
                     if success {
                         performUIUpdatesOnMain({
+                            self.activityIndicator.stopAnimating()
                             self.completeLogin()
                         })
                     } else {
+                        self.activityIndicator.stopAnimating()
                         performUIUpdatesOnMain({
                             self.downloadFailedAlert()
                         })
@@ -47,6 +54,7 @@ class LoginViewController: UIViewController {
                 })
             } else {
                 performUIUpdatesOnMain({
+                    self.activityIndicator.stopAnimating()
                     self.authorizationDidFail(withErrorString: errorString!)
                 })
             }
@@ -105,8 +113,7 @@ class LoginViewController: UIViewController {
     
     func initializeUser(userData:[String:AnyObject])  {
         let userDictionary = userData[ParseClient.AuthResponseKeys.User] as! [String:AnyObject]
-        let newUser = User(userDictionary: userDictionary)
-        appDel.user = newUser
+        User.currentUser = User(userDictionary: userDictionary)
     }
     
     func completeLogin(){
@@ -118,6 +125,13 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        activityIndicator.hidden = true
+        activityIndicator.hidesWhenStopped = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        activityLabel.hidden = true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

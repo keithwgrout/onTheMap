@@ -11,8 +11,7 @@ import Foundation
 class ParseClient {
     
     let parseSession = NSURLSession.sharedSession()
-    
-    
+    let studentList = StudentData.sharedInstance
     
     func postUserData(studentLocation: String?, andWebAddress studentWebAddress: String?, handlerForPostUserData:(success:Bool, errorString: String?)-> Void){
         let request = NSMutableURLRequest(URL: NSURL(string: ParseClient.Methods.StudentLocation)!)
@@ -22,7 +21,7 @@ class ParseClient {
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        request.HTTPBody = "{\"uniqueKey\": \"\(appDel.user!.uniqueKey!)\",\"firstName\": \"\(appDel.user!.firstName!)\",\"lastName\":\"\(appDel.user!.lastName!)\",\"mapString\": \"\(studentLocation!)\",\"mediaURL\":  \"\(studentWebAddress!)\",\"latitude\":\(appDel.user!.location!.latitude),\"longitude\":\(appDel.user!.location!.longitude)}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"\(User.currentUser!.uniqueKey!)\",\"firstName\": \"\(User.currentUser!.firstName!)\",\"lastName\":\"\(User.currentUser!.lastName!)\",\"mapString\": \"\(studentLocation!)\",\"mediaURL\":  \"\(studentWebAddress!)\",\"latitude\":\(User.currentUser!.location!.latitude),\"longitude\":\(User.currentUser!.location!.longitude)}".dataUsingEncoding(NSUTF8StringEncoding)
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
@@ -53,7 +52,7 @@ class ParseClient {
     }
 
     
-    func getParseData(completionHandlerForParseData: (success: Bool, errorString: String) -> Void){
+    func getParseData(completionHandlerForParseData: (success: Bool, errorString: String?) -> Void){
         
         let requestURLString = Methods.StudentLocation
         let requestURL = NSURL(string: requestURLString)
@@ -64,8 +63,6 @@ class ParseClient {
         
         let task = parseSession.dataTaskWithRequest(request) { (data, response, error) in
             
-            
-            
             guard data != nil else {
                 print("no data was returned")
                 completionHandlerForParseData(success: false, errorString: (error?.description)!)
@@ -75,7 +72,6 @@ class ParseClient {
                 completionHandlerForParseData(success: false, errorString: (error?.description)!)
                 return
             }
-            
             guard error == nil else {
                 completionHandlerForParseData(success: false, errorString: (error?.description)!)
                 return
@@ -89,11 +85,14 @@ class ParseClient {
                 parsedData = nil
             }
             
-            let studentJSONArray = parsedData!["results"] as! [[String:AnyObject]]
-            let students = Student.studentsFromResults(studentJSONArray)
-            appDel.students = students
-            print(students.count)
-            completionHandlerForParseData(success: true, errorString: "all good")
+            if let studentJSONArray = parsedData!["results"] as? [[String:AnyObject]] {
+                let students = Student.studentsFromResults(studentJSONArray)
+                self.studentList.students = students
+                completionHandlerForParseData(success: true, errorString: nil)
+            } else {
+                completionHandlerForParseData(success: false, errorString: nil)
+            }
+            
         }
         task.resume()
         

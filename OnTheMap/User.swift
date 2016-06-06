@@ -9,7 +9,9 @@
 import Foundation
 import CoreLocation
 
-struct User {
+class User {
+    
+    static var currentUser: User?
     
     var firstName: String?
     var lastName: String?
@@ -32,7 +34,5 @@ struct User {
             } else {
                 uniqueKey = "0"
             }
-            
-            
         }
 }

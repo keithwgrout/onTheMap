@@ -74,24 +74,39 @@
                                     <segue destination="ih4-4I-Lwv" kind="presentation" identifier="SafariSegue" id="dFb-a4-rOe"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="LDi-zG-oKk">
+                                <rect key="frame" x="290" y="428" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authenticating..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdy-tg-b3i">
+                                <rect key="frame" x="237" y="456" width="126" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.64462244710756333" blue="0.13132932644965134" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="oAE-ce-oMQ" firstAttribute="top" secondItem="0JL-zg-t9O" secondAttribute="bottom" constant="34" id="02t-OG-KVQ"/>
                             <constraint firstItem="aMa-aF-yoY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="1r8-io-u8a"/>
                             <constraint firstItem="4yi-4k-HR2" firstAttribute="leading" secondItem="oAE-ce-oMQ" secondAttribute="trailing" constant="8" symbolic="YES" id="3uf-wH-KiR"/>
+                            <constraint firstItem="LDi-zG-oKk" firstAttribute="top" secondItem="4yi-4k-HR2" secondAttribute="bottom" constant="8" id="7A6-MZ-Mnq"/>
                             <constraint firstItem="elJ-WO-aOP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AGs-sk-aie"/>
+                            <constraint firstItem="rdy-tg-b3i" firstAttribute="centerX" secondItem="LDi-zG-oKk" secondAttribute="centerX" id="Bzv-IE-0b3"/>
                             <constraint firstItem="aMa-aF-yoY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Knm-BR-man"/>
+                            <constraint firstItem="LDi-zG-oKk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PzF-xx-W1O"/>
                             <constraint firstAttribute="trailingMargin" secondItem="elJ-WO-aOP" secondAttribute="trailing" id="Uhf-W1-3E4"/>
                             <constraint firstItem="DYF-GP-ppk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Vdi-GQ-o70"/>
                             <constraint firstAttribute="leadingMargin" secondItem="oAE-ce-oMQ" secondAttribute="leading" id="WTi-b9-80k"/>
                             <constraint firstItem="ffc-b1-3U0" firstAttribute="top" secondItem="DYF-GP-ppk" secondAttribute="bottom" constant="22" id="XaG-02-XAX"/>
                             <constraint firstItem="4yi-4k-HR2" firstAttribute="baseline" secondItem="oAE-ce-oMQ" secondAttribute="baseline" id="Xqg-ka-pr0"/>
+                            <constraint firstItem="rdy-tg-b3i" firstAttribute="top" secondItem="LDi-zG-oKk" secondAttribute="bottom" constant="8" id="ciz-97-J1M"/>
                             <constraint firstItem="elJ-WO-aOP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="g8D-T6-T3p"/>
                             <constraint firstItem="elJ-WO-aOP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mGA-uK-lic"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="LDi-zG-oKk" id="ynb-xE-vu1"/>
+                        <outlet property="activityLabel" destination="rdy-tg-b3i" id="aJy-zh-TQd"/>
                         <outlet property="emailTextField" destination="ffc-b1-3U0" id="NgA-9E-LLT"/>
                         <outlet property="passwordTextField" destination="T0D-qp-FUO" id="6V2-IP-CfM"/>
                         <segue destination="2ct-WH-GSF" kind="show" identifier="MTCSegue" id="K5A-zV-Ywh"/>

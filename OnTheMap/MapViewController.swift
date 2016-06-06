@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
         let center = CLLocationCoordinate2D(latitude: 37, longitude: -98.5795)
         let span = MKCoordinateSpan(latitudeDelta: 20, longitudeDelta: 80)
         mapView.region = MKCoordinateRegion(center: center, span: span)
-        students = appDel.students
+        students = StudentData.sharedInstance.students!
         mapView.addAnnotations(students)
 
     }

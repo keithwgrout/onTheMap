@@ -24,7 +24,7 @@ class StudentTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         print("called")
-        students = appDel.students
+        students = StudentData.sharedInstance.students!
         students.sortInPlace({$0.updatedAt! > $1.updatedAt!})
         tableView.reloadData()
     }
