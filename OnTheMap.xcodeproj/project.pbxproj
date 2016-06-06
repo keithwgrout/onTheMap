@@ -85,6 +85,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		537B817F1D0619A5006B33DC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				53C75D2D1CF35A9700F2EF6D /* InformationPostingViewController.swift */,
+				53DCE8CD1CD77AE2009B090B /* LoginViewController.swift */,
+				53DCE9201CDA3E70009B090B /* MapTabController.swift */,
+				5354AFA71CDE60CA002ABF3A /* MapViewController.swift */,
+				53E827831CEB8C9000999DB2 /* StudentTableViewController.swift */,
+				53DCE91E1CD90EE0009B090B /* SignUpViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		537B81801D0619CC006B33DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				53C75D2F1CF4C71800F2EF6D /* User.swift */,
+				53FB47691CDE26D90049BE0E /* Student.swift */,
+				537B817D1D05F277006B33DC /* StudentData.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		537B81811D0619D9006B33DC /* NetworkClients */ = {
+			isa = PBXGroup;
+			children = (
+				53DCE8EB1CD7A6A8009B090B /* UdacityClient.swift */,
+				53DCE9261CDCE095009B090B /* ParseClient.swift */,
+				53DCE9281CDCE1C9009B090B /* ParseConstants.swift */,
+				53DCE8ED1CD7A811009B090B /* UdacityConstants.swift */,
+			);
+			name = NetworkClients;
+			sourceTree = "<group>";
+		};
+		537B81821D0619FC006B33DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				53DCE8CB1CD77AE2009B090B /* AppDelegate.swift */,
+				5354AFAD1CDE9BF1002ABF3A /* GCD.swift */,
+				53DCE8D21CD77AE2009B090B /* Assets.xcassets */,
+				53DCE8D41CD77AE2009B090B /* LaunchScreen.storyboard */,
+				53DCE8D71CD77AE2009B090B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		53DCE8BF1CD77AE2009B090B = {
 			isa = PBXGroup;
 			children = (
@@ -108,24 +154,10 @@
 			isa = PBXGroup;
 			children = (
 				53DCE8CF1CD77AE2009B090B /* Main.storyboard */,
-				53C75D2D1CF35A9700F2EF6D /* InformationPostingViewController.swift */,
-				53DCE8CD1CD77AE2009B090B /* LoginViewController.swift */,
-				53DCE9201CDA3E70009B090B /* MapTabController.swift */,
-				5354AFA71CDE60CA002ABF3A /* MapViewController.swift */,
-				53E827831CEB8C9000999DB2 /* StudentTableViewController.swift */,
-				53DCE91E1CD90EE0009B090B /* SignUpViewController.swift */,
-				53DCE8CB1CD77AE2009B090B /* AppDelegate.swift */,
-				53C75D2F1CF4C71800F2EF6D /* User.swift */,
-				5354AFAD1CDE9BF1002ABF3A /* GCD.swift */,
-				53FB47691CDE26D90049BE0E /* Student.swift */,
-				53DCE8EB1CD7A6A8009B090B /* UdacityClient.swift */,
-				53DCE9261CDCE095009B090B /* ParseClient.swift */,
-				537B817D1D05F277006B33DC /* StudentData.swift */,
-				53DCE9281CDCE1C9009B090B /* ParseConstants.swift */,
-				53DCE8ED1CD7A811009B090B /* UdacityConstants.swift */,
-				53DCE8D21CD77AE2009B090B /* Assets.xcassets */,
-				53DCE8D41CD77AE2009B090B /* LaunchScreen.storyboard */,
-				53DCE8D71CD77AE2009B090B /* Info.plist */,
+				537B81821D0619FC006B33DC /* Supporting Files */,
+				537B81801D0619CC006B33DC /* Models */,
+				537B817F1D0619A5006B33DC /* Controllers */,
+				537B81811D0619D9006B33DC /* NetworkClients */,
 			);
 			path = OnTheMap;
 			sourceTree = "<group>";
