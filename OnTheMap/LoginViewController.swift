@@ -48,12 +48,14 @@ class LoginViewController: UIViewController {
                     } else {
                         self.activityIndicator.stopAnimating()
                         performUIUpdatesOnMain({
+                            self.activityLabel.hidden = true
                             self.downloadFailedAlert()
                         })
                     }
                 })
             } else {
                 performUIUpdatesOnMain({
+                    self.activityLabel.hidden = true
                     self.activityIndicator.stopAnimating()
                     self.authorizationDidFail(withErrorString: errorString!)
                 })
