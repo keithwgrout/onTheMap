@@ -63,21 +63,24 @@ extension MapViewController: MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
             
-            var url = NSURL(string: ((view.annotation?.subtitle)!)!)
+            let url = NSURL(string: ((view.annotation?.subtitle)!)!)
             var urlString: String
             
-            if let url = url {
+            if var url = url {
                 urlString = String(url)
+                if url.scheme.lowercaseString != "https" && url.scheme.lowercaseString != "http" {
+                    urlString = "http://" + urlString
+                    url = NSURL(string: urlString)!
+                }
+                app.openURL(url)
             } else {
-                url = NSURL(string: "apple.com")
-                urlString = "apple"
+                let alert = UIAlertController(title: "Something went wrong", message: "There was no available url to load.", preferredStyle: .Alert)
+                let alertAction = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+                alert.addAction(alertAction)
+                presentViewController(alert, animated: true, completion: nil)
             }
             
-            if url!.scheme.lowercaseString != "https" && url!.scheme.lowercaseString != "http" {
-                urlString = "http://" + urlString
-                url = NSURL(string: urlString)
-            }
-            app.openURL(url!)
+            
         }
     }
     
