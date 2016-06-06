@@ -24,8 +24,7 @@ class MapTabController: UITabBarController {
         let tabs = self.viewControllers
         let tableVC = tabs![1] as! StudentTableViewController
         
-        tableVC.students = StudentData.sharedInstance.students!
-        tableVC.students.sortInPlace({$0.updatedAt! > $1.updatedAt!})
+        StudentData.sharedInstance.students!.sortInPlace({$0.updatedAt! > $1.updatedAt!})
         performUIUpdatesOnMain({
             tableVC.tableView!.reloadData()
         })

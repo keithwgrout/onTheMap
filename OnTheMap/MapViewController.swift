@@ -14,15 +14,13 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    var students = [Student]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         let center = CLLocationCoordinate2D(latitude: 37, longitude: -98.5795)
         let span = MKCoordinateSpan(latitudeDelta: 20, longitudeDelta: 80)
         mapView.region = MKCoordinateRegion(center: center, span: span)
-        students = StudentData.sharedInstance.students!
-        mapView.addAnnotations(students)
+        mapView.addAnnotations(StudentData.sharedInstance.students!)
 
     }
     

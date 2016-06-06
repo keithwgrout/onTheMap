@@ -12,7 +12,6 @@ class StudentTableViewController: UITableViewController {
     
    
    
-    var students = [Student]()
 
     override func viewDidLoad() {
         tableView.delegate = self
@@ -24,22 +23,21 @@ class StudentTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         print("called")
-        students = StudentData.sharedInstance.students!
-        students.sortInPlace({$0.updatedAt! > $1.updatedAt!})
+        StudentData.sharedInstance.students!.sortInPlace({$0.updatedAt! > $1.updatedAt!})
         tableView.reloadData()
     }
 
     // MARK: - Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return students.count
+        return StudentData.sharedInstance.students!.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("StudentCell", forIndexPath: indexPath)
 
         // Configure the cell...
-        let student = students[indexPath.row]
+        let student = StudentData.sharedInstance.students![indexPath.row]
         cell.textLabel?.text = "\(student.firstName!) \(student.lastName!)"
         cell.detailTextLabel?.text = student.mediaURL!
         return cell
@@ -47,7 +45,7 @@ class StudentTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let student = students[indexPath.row]
+        let student = StudentData.sharedInstance.students![indexPath.row]
         let app = UIApplication.sharedApplication()
         
         var url = NSURL(string: student.subtitle!)
