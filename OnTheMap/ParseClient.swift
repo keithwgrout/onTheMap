@@ -15,9 +15,7 @@ class ParseClient {
     
     
     func postUserData(studentLocation: String?, andWebAddress studentWebAddress: String?, handlerForPostUserData:(success:Bool, errorString: String?)-> Void){
-        // make NSurlRequest with api method
         let request = NSMutableURLRequest(URL: NSURL(string: ParseClient.Methods.StudentLocation)!)
-        // declare type of request (GET, POST, etc)
         
         request.HTTPMethod = "POST"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -29,12 +27,12 @@ class ParseClient {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             guard error == nil else {
-                print(error)
+                print("error: ", error)
                 handlerForPostUserData(success: false, errorString: "Error encountered while posting data.")
                 return
             }
             
-            guard response == nil else {
+            guard response != nil else {
                 handlerForPostUserData(success: false, errorString: "No response from server.")
                 return
             }

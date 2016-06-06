@@ -133,10 +133,10 @@ class InformationPostingViewController: UIViewController {
     }
     
     func displayMapWithPlacemark(placemark: MKPlacemark?){
-        var user = appDel.user
-        user!.location = placemark?.coordinate
-        let lat = user?.location?.latitude
-        let lon = user?.location?.longitude
+        appDel.user?.location = placemark?.coordinate
+
+        let lat = appDel.user?.location?.latitude
+        let lon = appDel.user?.location?.longitude
         let center = CLLocationCoordinate2D(latitude: lat!, longitude: lon!)
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         

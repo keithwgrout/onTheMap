@@ -67,15 +67,15 @@ class LoginViewController: UIViewController {
         
         passwordText.text = passwordText.text?.stringByTrimmingCharactersInSet(whitespace)
         emailText.text = emailText.text?.stringByTrimmingCharactersInSet(whitespace)
-
-        if passwordText.text == nil || (passwordText.text?.isEmpty)! {
-            let alert = UIAlertController(title: "Password is required", message: "Please input a password.", preferredStyle: .Alert)
+        
+        if emailText.text == nil || (emailText.text?.isEmpty)!{
+            let alert = UIAlertController(title: "Email is required", message: "Please enter the email you used to sign up with Udacity.", preferredStyle: .Alert)
             let action = UIAlertAction(title: "Okay", style: .Default, handler: nil)
             alert.addAction(action)
             presentViewController(alert, animated: true, completion: nil)
             return false
-        } else if emailText.text == nil || (emailText.text?.isEmpty)!{
-            let alert = UIAlertController(title: "Email is required", message: "Please enter the email you used to sign up with Udacity.", preferredStyle: .Alert)
+        } else if passwordText.text == nil || (passwordText.text?.isEmpty)! {
+            let alert = UIAlertController(title: "Password is required", message: "Please input a password.", preferredStyle: .Alert)
             let action = UIAlertAction(title: "Okay", style: .Default, handler: nil)
             alert.addAction(action)
             presentViewController(alert, animated: true, completion: nil)
@@ -118,12 +118,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

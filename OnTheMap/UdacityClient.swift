@@ -74,7 +74,6 @@ class UdacityClient {
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
             
             var parsedData: AnyObject?
-            
             do {
                 parsedData = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
             } catch {
@@ -139,8 +138,6 @@ class UdacityClient {
             }
             
             guard parsedData[UdacityClient.JSONResponseKeys.error]! == nil else {
-                print("here we've failed")
-                print(parsedData)
                 if parsedData[UdacityClient.JSONResponseKeys.status] as! Int == 403 {
                     print("invalid credentials")
                     completionHandlerForSessionID(success: false, sessionID: nil, errorString: "invalid credentials")
